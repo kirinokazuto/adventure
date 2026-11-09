@@ -48,14 +48,23 @@ class ALTEREMOTIONS_API AalaterCharacter : public ACharacter
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     UInputAction* PowerJumpAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* AttackAction;
+
 public:
     AalaterCharacter();
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PowerUp")
     bool bHasTakara = false;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PowerUp")
+    bool bHasAttackTakara = false;
+
     UFUNCTION()
     void PowerJump();
+
+    UFUNCTION()
+    void Attack();
 
 protected:
 

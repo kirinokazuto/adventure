@@ -83,7 +83,7 @@ void AalaterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
         EnhancedInputComponent->BindAction(PowerJumpAction,ETriggerEvent::Started,this,&AalaterCharacter::PowerJump);
-
+        EnhancedInputComponent->BindAction(AttackAction,ETriggerEvent::Started,this,&AalaterCharacter::Attack);
 
         // Moving
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AalaterCharacter::Move);
@@ -115,6 +115,19 @@ void AalaterCharacter::PowerJump()
     if (bHasTakara)
     {
         GetCharacterMovement()->JumpZVelocity = 1000.0f;
+    }
+}
+
+void AalaterCharacter::Attack()
+{
+    if (bHasAttackTakara)
+    {
+        GEngine->AddOnScreenDebugMessage(
+            -1,
+            2.f,
+            FColor::Red,
+            TEXT("Attack!")
+        );
     }
 }
 
