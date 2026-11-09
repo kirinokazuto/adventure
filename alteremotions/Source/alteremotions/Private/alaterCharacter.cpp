@@ -82,6 +82,8 @@ void AalaterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
         // Jumping
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+        EnhancedInputComponent->BindAction(PowerJumpAction,ETriggerEvent::Started,this,&AalaterCharacter::PowerJump);
+
 
         // Moving
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AalaterCharacter::Move);
@@ -105,6 +107,14 @@ void AalaterCharacter::Look(const FInputActionValue& Value)
         // add yaw and pitch input to controller
         AddControllerYawInput(LookAxisVector.X);
         AddControllerPitchInput(LookAxisVector.Y);
+    }
+}
+
+void AalaterCharacter::PowerJump()
+{
+    if (bHasTakara)
+    {
+        GetCharacterMovement()->JumpZVelocity = 1000.0f;
     }
 }
 
