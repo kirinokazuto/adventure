@@ -49,6 +49,7 @@ class ALTEREMOTIONS_API AalaterCharacter : public ACharacter
 public:
     AalaterCharacter();
 
+
 protected:
 
     virtual void BeginPlay() override;
