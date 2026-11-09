@@ -83,6 +83,7 @@ void AalaterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCom
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
         EnhancedInputComponent->BindAction(PowerJumpAction,ETriggerEvent::Started,this,&AalaterCharacter::PowerJump);
+        EnhancedInputComponent->BindAction(SelectAttackAction,ETriggerEvent::Started,this,&AalaterCharacter::SelectAttack);
         EnhancedInputComponent->BindAction(AttackAction,ETriggerEvent::Started,this,&AalaterCharacter::Attack);
 
         // Moving
@@ -118,18 +119,68 @@ void AalaterCharacter::PowerJump()
     }
 }
 
-void AalaterCharacter::Attack()
+void AalaterCharacter::SelectAttack()
 {
     if (bHasAttackTakara)
     {
+        bAttackSelected = true;
+
         GEngine->AddOnScreenDebugMessage(
             -1,
             2.f,
             FColor::Red,
-            TEXT("Attack!")
+            TEXT("Attack Selected!")
         );
     }
 }
+
+void AalaterCharacter::Attack()
+{
+    if (bHasAttackTakara && bAttackSelected)
+    {
+        if (AttackMontage)
+        {
+            float Result = PlayAnimMontage(AttackMontage);
+
+            if (Result > 0.f)
+            {
+                GEngine->AddOnScreenDebugMessage(
+                    -1,
+                    2.f,
+                    FColor::Green,
+                    TEXT("Montage Success!")
+                );
+            }
+            else
+            {
+                GEngine->AddOnScreenDebugMessage(
+                    -1,
+                    2.f,
+                    FColor::Yellow,
+                    TEXT("Montage Failed!")
+                );
+            }
+        }
+    }
+}
+
+//void AalaterCharacter::Attack()
+//{
+//    if (bHasAttackTakara && bAttackSelected)
+//    {
+//        GEngine->AddOnScreenDebugMessage(
+//            -1,
+//            2.f,
+//            FColor::Red,
+//            TEXT("Attack Enabled!")
+//        );
+//
+//        if (AttackMontage)
+//        {
+//            PlayAnimMontage(AttackMontage);
+//        }
+//    }
+//}
 
 void AalaterCharacter::Move(const FInputActionValue& Value)
 {

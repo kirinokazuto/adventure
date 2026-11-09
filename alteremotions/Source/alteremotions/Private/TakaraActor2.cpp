@@ -12,6 +12,13 @@ ATakaraActor2::ATakaraActor2()
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
+	Sphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere"));
+	RootComponent = Sphere;
+
+	Sphere->SetSphereRadius(100.0f);
+
+	Mesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Mesh"));
+	Mesh->SetupAttachment(RootComponent);
 }
 
 // Called when the game starts or when spawned

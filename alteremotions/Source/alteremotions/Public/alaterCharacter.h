@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Animation/AnimMontage.h"
 #include "alaterCharacter.generated.h"
 
 class USpringArmComponent;
@@ -51,8 +52,14 @@ class ALTEREMOTIONS_API AalaterCharacter : public ACharacter
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     UInputAction* AttackAction;
 
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+    UInputAction* SelectAttackAction;
+
 public:
     AalaterCharacter();
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Attack")
+    UAnimMontage* AttackMontage;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PowerUp")
     bool bHasTakara = false;
@@ -60,8 +67,14 @@ public:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PowerUp")
     bool bHasAttackTakara = false;
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "PowerUp")
+    bool bAttackSelected = false;
+
     UFUNCTION()
     void PowerJump();
+
+    UFUNCTION()
+    void SelectAttack();
 
     UFUNCTION()
     void Attack();
