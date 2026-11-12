@@ -15,6 +15,13 @@ class ALTEREMOTIONS_API ATakaraActor2 : public AActor
 	GENERATED_BODY()
 	
 public:	
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Sphere")
+	USphereComponent* Sphere;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Mesh")
+	UStaticMeshComponent* Mesh;
+
 	// Sets default values for this actor's properties
 	ATakaraActor2();
 
@@ -26,9 +33,5 @@ protected:
 
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
-	UPROPERTY(VisibleAnywhere)
-	USphereComponent* Sphere;
-
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* Mesh;
+	
 };
