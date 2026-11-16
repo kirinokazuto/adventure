@@ -48,10 +48,10 @@ void ATakaraActor::NotifyActorBeginOverlap(AActor* OtherActor)
 		Player->bHasTakara = true;
 
 		GEngine->AddOnScreenDebugMessage(
-			-1,
-			3.f,
+			-20,
+			20.f,
 			FColor::Green,
-			TEXT("Takara Get!")
+			TEXT("takaraGET!!")
 		);
 
 		Destroy();
